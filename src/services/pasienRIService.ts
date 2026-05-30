@@ -1,5 +1,6 @@
 import { poolPromise } from "../config/db";
 import { logger } from "../utils/logger";
+import { hitungUmurDetail } from "../utils/ageHelper";
 
 export const getPasienRI = async (
   gugus?: string,
@@ -19,9 +20,18 @@ export const getPasienRI = async (
           a.vc_no_rm, 
           c.vc_no_ktp, 
           c.vc_nama_p, 
-          c.dt_tgl_lhr, 
+          c.dt_tgl_lhr,
           b.vc_nama,
-          a.vc_no_regj_ralan
+          a.vc_no_regj_ralan,
+          CASE 
+            WHEN s.vc_NoReg IS NOT NULL THEN 'SUDAH'
+            ELSE 'BELUM'
+          END AS status_skrining,
+          s.bt_SkriningAnak AS jenis_skrining_anak,
+          CASE 
+            WHEN ag.vc_no_reg IS NOT NULL THEN 'SUDAH'
+            ELSE 'BELUM'
+          END AS status_asuhan
         FROM RMP_inap a 
         LEFT JOIN RMKamar b ON (
           CASE 
@@ -30,6 +40,12 @@ export const getPasienRI = async (
           END
         ) = b.vc_no_bed
         LEFT JOIN RMPasien c ON a.vc_no_rm = c.vc_no_rm
+        LEFT JOIN (
+            SELECT vc_NoReg, bt_SkriningAnak FROM _ASKEPIGD_SkriningGizi
+            UNION
+            SELECT vc_NoReg, bt_SkriningAnak FROM _AskepRajal_SkriningGizi
+        ) s ON s.vc_NoReg IN (a.vc_no_reg, a.vc_no_regj_ralan)
+        LEFT JOIN _GiziAsuhanGiziRI ag ON ag.vc_no_reg IN (a.vc_no_reg, a.vc_no_regj_ralan) AND ag.bt_aktif = '1'
         WHERE (
           CASE 
             WHEN ISNULL(a.vc_kd_Ruang_mutasi, '') = '' THEN a.vc_kd_Ruang_masuk
@@ -43,8 +59,33 @@ export const getPasienRI = async (
     } else {
       query += ` AND a.dt_tgl_pul IS NULL`;
     }
+
     const result = await request.query(query);
-    return result.recordset;
+    const pasienList = result.recordset;
+
+    // --- PROSES MENGHITUNG UMUR DETAIL DISINI ---
+    const pasienDenganUmur = pasienList.map((pasien: any) => {
+      if (pasien.dt_tgl_lhr) {
+        const detailUmur = hitungUmurDetail(pasien.dt_tgl_lhr);
+        return {
+          ...pasien,
+          umur_tahun: detailUmur.tahun,
+          umur_bulan: detailUmur.bulan,
+          umur_hari: detailUmur.hari,
+        };
+      }
+
+      // Jika data tanggal lahir kosong
+      return {
+        ...pasien,
+        umur_tahun: 0,
+        umur_bulan: 0,
+        umur_hari: 0,
+      };
+    });
+
+    return pasienDenganUmur;
+
   } catch (error) {
     logger.error("Error in getPasienRI", error);
     throw error;

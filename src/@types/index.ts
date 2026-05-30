@@ -28,6 +28,9 @@ export interface IPasienRI {
   dt_tgl_lhr: Date;
   vc_nama: string;
   vc_noregj_ralan: string;
+  umur_tahun: number;
+  umur_bulan: number;
+  umur_hari: number;
 }
 
 export interface IPasienRJ {
@@ -39,6 +42,39 @@ export interface IPasienRJ {
   vc_n_klinik?: string;
   vc_pekerjaan?: string;
   vc_pendidikan?: string;
+  umur_tahun: number;
+  umur_bulan: number;
+  umur_hari: number;
+}
+
+export interface IDataPddk {
+  vc_kode?: string;
+  vc_pendidikan?: string;
+}
+
+export interface IDataPekerjaan {
+  vc_kode?: string;
+  vc_pekerjaan?: string;
+}
+
+export interface IDataSDMDokter {
+  vc_nid?: string;
+  vc_nama_kry?: string;
+}
+
+export interface IDataJenisDiit {
+  vc_kode?: string;
+  vc_jns_diet?: string;
+}
+
+export interface IDataRiwayatKunjung {
+  vc_no_regj?: string;
+  vc_no_rm?: string;
+  vc_id?: string;
+  dt_tanggal?: string;
+  vc_nama_ahli_gizi?: string;
+  vc_diagnosa_medis?: string;
+  bt_aktif?: string;
 }
 
 export interface ISkriningGiziRI {
@@ -68,7 +104,7 @@ export interface ISkriningGiziRI {
     si_SkorKondisiTertentu: string;
     vc_SkorAkhir: string;
     bt_KonsultasiAhliGizi: string;
-  }
+  };
 
   _AskepRajal_SkriningGizi: {
     vc_NoReg: string;
@@ -96,11 +132,13 @@ export interface ISkriningGiziRI {
     si_SkorKondisiTertentu: string;
     vc_SkorAkhir: string;
     bt_KonsultasiAhliGizi: string;
-  }
+  };
 }
 
-export interface IAsuhanGiziAnakRI {
+export interface IAsuhanGiziRI {
+  vc_id?: string;
   vc_no_reg: string;
+  vc_no_rm: string;
 
   riwayat_gizi: {
     vc_pola_makan?: string;
@@ -116,13 +154,17 @@ export interface IAsuhanGiziAnakRI {
 
   antropometri: {
     vc_bb?: string;
-    vc_pb?: string;
     vc_tb?: string;
+    vc_lila?: string;
     vc_imt?: string;
+    vc_bbi?: string;
+    vc_status_gizi?: string;
+    // Khusus Anak
+    vc_pb?: string;
     vc_bb_pb?: string;
     vc_bb_tb?: string;
-    vc_lila?: string;
-    vc_status_gizi?: string;
+    // Khusus Dewasa
+    vc_persen_lila?: string;
   };
 
   vc_biokimia?: string;
@@ -131,98 +173,27 @@ export interface IAsuhanGiziAnakRI {
   fisik_klinis: {
     bt_edema?: string;
     bt_asites?: string;
-    bt_kesulitan_menghisap?: string;
     bt_nafsu_makan?: string;
     bt_gigi_geligi?: string;
     vc_fisik_lainnya?: string;
+    // Khusus Anak
+    bt_kesulitan_menghisap?: string;
+    // Khusus Anak dan Dewasa
+    vc_sistole?: string;
+    vc_diastole?: string;
   };
 
   riwayat_personal: {
     vc_pendidikan?: string;
     bt_suplemen_obat?: string;
     vc_suplemen_obat?: string;
-    vc_riwayat_penyakit_keluarga?: string;
-    vc_riwayat_penyakit_dulu?: string;
-    vc_riwayat_penyakit_sekarang?: string;
-    vc_masalah_cerna?: string;
-  };
-
-  vc_diagnosis_gizi?: string;
-
-  intervensi_gizi: {
-    vc_tujuan_intervensi?: string;
-    jenis: {
-      vc_jenis_diit?: string,
-      vc_modifikasi_diit?: string,
-      vc_bentuk?: string,
-      vc_jadwal_pemberian_diit?: string,
-      vc_jalur_makanan?: string,
-    }
-    modifikasi: {
-      vc_modifikasi_diit?: string,
-      vc_bentuk?: string,
-      vc_jadwal_pemberian_diit?: string,
-      vc_jalur_makanan?: string,
-    }
-  };
-
-  monitoring_evaluasi:{
-    dt_tanggal?: Date,
-    vc_keterangan?: string,
-    vc_paraf?: string,
-  };
-
-  dt_tanggal?:Date,
-  vc_nama_ahli_gizi?: string,
-  bt_anak?: string
-}
-
-export interface IAsuhanGiziDewasaRI {
-  vc_no_reg: string;
-
-  antropometri: {
-    vc_bb?: string;
-    vc_tb?: string;
-    vc_lila?: string;
-    vc_imt?: string;
-    vc_persen_lila?: string;
-    vc_status_gizi?: string;
-  };
-
-  vc_biokimia?: string; 
-  vc_pemeriksaan_penunjang?: string;
-
-  fisik_klinis: {
-    vc_td?: string;
-    bt_nafsu_makan?: string;
-    bt_edema?: string;
-    bt_gigi_geligi?: string;
-    bt_asites?: string;
-    vc_fisik_lainnya?: string;
-  };
-
-  riwayat_gizi: {
-    vc_pola_makan?: string;
-    bt_diit_konseling?: string;
-    vc_diit_konseling?: string;
-    bt_alergi_makanan?: string;
-    vc_alergi_makanan?: string;
-    bt_pantangan_makanan?: string;
-    vc_pantangan_makanan?: string;
-    bt_ketidaksukaan_makan?: string;
-    vc_ketidaksukaan_makan?: string;
-  };
-
-  riwayat_personal: {
-    vc_pekerjaan?: string;
-    vc_pendidikan?: string;
     vc_riwayat_penyakit_keluarga?: string;
     vc_riwayat_penyakit_dulu?: string;
     vc_riwayat_penyakit_sekarang?: string;
     vc_masalah_cerna?: string;
     bt_perokok?: string;
-    bt_suplemen_obat?: string;
-    vc_suplemen_obat?: string;
+    // Khusus Dewasa
+    vc_pekerjaan?: string;
   };
 
   vc_diagnosis_gizi?: string;
@@ -230,62 +201,69 @@ export interface IAsuhanGiziDewasaRI {
   intervensi_gizi: {
     vc_tujuan_intervensi?: string;
     jenis: {
-      vc_jenis_diit?: string,
-      vc_modifikasi_diit?: string,
-      vc_bentuk?: string,
-      vc_jadwal_pemberian_diit?: string,
-      vc_jalur_makanan?: string,
+      vc_jenis_makanan?: string;
+      vc_jenis_diit?: string;
+      vc_modifikasi_diit?: string;
+      vc_bentuk?: string;
+      vc_jadwal_pemberian_diit?: string;
+      vc_jalur_makanan?: string;
     };
     modifikasi: {
-      vc_modifikasi_diit?: string,
-      vc_bentuk?: string,
-      vc_jadwal_pemberian_diit?: string,
-      vc_jalur_makanan?: string,
-    }
+      vc_modifikasi_diit?: string;
+      vc_bentuk?: string;
+      vc_jadwal_pemberian_diit?: string;
+      vc_jalur_makanan?: string;
+    };
   };
 
-  monitoring_evaluasi:{
-    dt_tanggal?: Date,
-    vc_keterangan?: string,
-    vc_paraf?: string,
-  };
-
-  dt_tanggal?:Date,
-  vc_nama_ahli_gizi?: string,
-  bt_anak?: string
+  dt_tanggal?: Date;
+  vc_nama_ahli_gizi?: string;
+  bt_anak?: string;
+  bt_aktif?: string;
 }
 
-export interface IAsuhanGiziAnakRJ {
+export interface IAsuhanGiziRJ {
+  vc_id?: string;
   vc_no_reg: string;
+  vc_no_rm: string;
   vc_dokter_pengirim?: string;
   vc_diagnosa_medis?: string;
 
-  antropometri: {
+  antropometri?: {
     vc_bb?: string;
-    vc_pb?: string;
     vc_tb?: string;
+    vc_lila?: string;
+    vc_imt?: string;
+    vc_status_gizi?: string;
+    // Khusus Anak
+    vc_pb?: string;
     vc_bb_pb?: string;
     vc_bb_u?: string;
     vc_pb_tb?: string;
-    vc_lila?: string;
-    vc_status_gizi?: string;
-    vc_imt?: string;
+    // Khusus Dewasa
+    vc_bbi?: string;
+    vc_persen_lila?: string;
   };
-  
+
   vc_biokimia?: string;
   vc_pemeriksaan_penunjang?: string;
 
-  fisik_klinis: {
+  fisik_klinis?: {
     bt_edema?: string;
     bt_nafsu_makan?: string;
     bt_asites?: string;
     bt_gigi_geligi?: string;
-    bt_kesulitan_menghisap?: string;
     vc_fisik_lainnya?: string;
+    // Khusus Anak
+    bt_kesulitan_menghisap?: string;
+    // Khusus Anak dan Dewasa
+    vc_sistole?: string;
+    vc_diastole?: string;
   };
-  
-  riwayat_gizi: {
-    vc_pola_makan?: string;
+
+  riwayat_gizi?: {
+    vc_pola_makan?: string; // Anak
+    vc_anamnesa_riwayat_makan?: string; // Dewasa
     bt_diit_konseling?: string;
     vc_diit_konseling?: string;
     bt_alergi_makanan?: string;
@@ -296,8 +274,8 @@ export interface IAsuhanGiziAnakRJ {
     vc_ketidaksukaan_makan?: string;
   };
 
-  riwayat_personal: {
-    vc_pekerjaan?: string;
+  riwayat_personal?: {
+    vc_pekerjaan?: string; // Dewasa
     vc_pendidikan?: string;
     vc_riwayat_penyakit_keluarga?: string;
     vc_riwayat_penyakit_dulu?: string;
@@ -310,92 +288,36 @@ export interface IAsuhanGiziAnakRJ {
 
   vc_diagnosis_gizi?: string;
 
-  intervensi_gizi: {
+  intervensi_gizi?: {
+    vc_jenis_makanan?: string;
     vc_jenis_diit?: string;
     vc_tujuan?: string;
     vc_jadwal?: string;
-    vc_makanan_dianjurkan?:string;
-    vc_makanan_tidak_dianjurkan?:string;
-    bt_leaflet?:string;
+    vc_makanan_dianjurkan?: string;
+    vc_makanan_tidak_dianjurkan?: string;
+    bt_leaflet?: string;
   };
 
-  monitoring_evaluasi: {
-    dt_tanggal?: Date;
-    vc_pola_makan?: string;
-    vc_keterangan?: string;
-  };
-
-  dt_tanggal?:Date,
-  vc_nama_ahli_gizi?: string,
-  bt_anak?: string
+  dt_tanggal?: Date;
+  vc_nama_ahli_gizi?: string;
+  bt_anak?: string;
+  bt_aktif?: string;
 }
 
-export interface IAsuhanGiziDewasaRJ {
-  vc_no_reg: string;
+export interface IMonitoringEvaluasiRI {
+  vc_id?: string;
+  vc_noreg: string;
+  vc_norm: string;
+  dt_tanggal_monev: string;
+  vc_keterangan_monev: string;
+  vc_nama_ahli_gizi?: string;
+}
 
-  vc_bb?: string;
-  vc_tb?: string;
-  vc_bbi?: string;
-  vc_lila?: string;
-  vc_imt?: string;
-  vc_persen_lila?: string;
-  vc_status_gizi?: string;
-
-  vc_dokter_pengirim?: string;
-  vc_diagnosa_medis?: string;
-
-  asesmen_gizi: {
-    vc_anamnesa_riwayat_makan?: string;
-    bt_diit_konseling?: string;
-    vc_diit_konseling?: string;
-    bt_alergi_makanan?: string;
-    vc_alergi_makanan?: string;
-    bt_pantangan_makanan?: string;
-    vc_pantangan_makanan?: string;
-    bt_ketidaksukaan_makan?: string;
-    vc_ketidaksukaan_makan?: string;
-  };
-
-  riwayat_personal: {
-    vc_pekerjaan?: string;
-    vc_pendidikan?: string;
-    vc_riwayat_penyakit_keluarga?: string;
-    vc_riwayat_penyakit_dulu?: string;
-    vc_riwayat_penyakit_sekarang?: string;
-    vc_masalah_cerna?: string;
-    bt_perokok?: string;
-    bt_suplemen_obat?: string;
-    vc_suplemen_obat?: string; 
-  };
-
-  fisik_klinis: {
-    vc_td?: string;
-    bt_nafsu_makan?: string;
-    bt_edema?: string;
-    bt_asites?: string;
-  };
-
-  vc_biokimia?: string;
-  vc_pemeriksaan_penunjang?: string;
-
-  vc_diagnosis_gizi?: string;
-
-  intervensi_gizi: {
-    vc_jenis_diit?: string;
-    vc_tujuan?: string;
-    vc_jadwal?: string;
-    vc_makanan_dianjurkan?:string;
-    vc_makanan_tidak_dianjurkan?:string;
-    bt_leaflet?:string;
-  };
-
-  monitoring_evaluasi: {
-    dt_tanggal?: Date;
-    vc_pola_makan?: string;
-    vc_keterangan?: string;
-  };
-
-  dt_tanggal?:Date,
-  vc_nama_ahli_gizi?: string,
-  bt_anak?: string
+export interface IMonitoringEvaluasiRJ {
+  vc_id?: string;
+  vc_noreg: string;
+  vc_norm: string;
+  dt_tanggal_monev: string;
+  vc_keterangan_monev: string;
+  vc_nama_ahli_gizi?: string;
 }

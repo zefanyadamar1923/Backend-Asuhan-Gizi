@@ -6,11 +6,12 @@ export const getSkriningGiziRI = async (noReg: string): Promise<ISkriningGiziRI 
   try {
     const pool = await poolPromise;
     const request = pool.request();
-    
+
     request.input('noReg', noReg);
-    
+
     const query = `
       SELECT
+        vc_Id,
         vc_NoReg,
         vc_NoRM,
         bt_SkriningAnak,
@@ -37,11 +38,12 @@ export const getSkriningGiziRI = async (noReg: string): Promise<ISkriningGiziRI 
         vc_SkorAkhir,
         bt_KonsultasiAhliGizi
       FROM _ASKEPIGD_SkriningGizi
-      WHERE vc_NoReg = @noReg
+      WHERE vc_NoReg = @noReg and bt_aktif = '1'
 
       UNION ALL
 
       SELECT
+        vc_Id,
         vc_NoReg,
         vc_NoRM,
         bt_SkriningAnak,
@@ -68,15 +70,15 @@ export const getSkriningGiziRI = async (noReg: string): Promise<ISkriningGiziRI 
         vc_SkorAkhir,
         bt_KonsultasiAhliGizi
       FROM _AskepRajal_SkriningGizi
-      WHERE vc_NoReg = @noReg
+      WHERE vc_NoReg = @noReg and bt_aktif = '1'
     `;
-    
+
     const result = await request.query(query);
-    
+
     if (result.recordset && result.recordset.length > 0) {
       return result.recordset[0] as ISkriningGiziRI;
     }
-    
+
     return null;
   } catch (error) {
     logger.error('Error in getSkriningGiziAnakRI', error);

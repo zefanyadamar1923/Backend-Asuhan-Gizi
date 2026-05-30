@@ -6,7 +6,7 @@ import { ISkriningGiziRI, IApiResponse } from '../@types';
 export const getSkriningGiziRIController = async (req: Request, res: Response): Promise<void> => {
   const no_reg = req.params.no_reg;
   if (!no_reg) {
-    res.status(400).json({ success: false, message: 'no_reg parameter is required' } as IApiResponse);
+    res.status(400).json({ success: false, message: 'no_reg tidak ditemukan' } as IApiResponse);
     return;
   }
 
