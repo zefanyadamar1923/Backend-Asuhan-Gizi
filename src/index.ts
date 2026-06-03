@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import apiRoutes from "./routes/apiRoutes";
+import { setupSwagger } from "./swagger";
 
 dotenv.config();
 
@@ -14,6 +15,9 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api", apiRoutes);
+
+// Setup Swagger UI
+setupSwagger(app, PORT);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("API Asuhan Gizi Anak is Running...");

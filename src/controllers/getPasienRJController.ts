@@ -9,7 +9,7 @@ export const getPasienRJController = async (
 ): Promise<void> => {
   try {
     const tanggal =
-      (req.query.tanggal as string) || (req.body.tanggal as string);
+      (req.query?.tanggal as string) || (req.body?.tanggal as string);
     const data = await getPasienRJ(tanggal);
 
     if (!data || data.length === 0) {
