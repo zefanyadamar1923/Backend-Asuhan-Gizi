@@ -219,6 +219,12 @@ router.get("/monev-ri/save/:vc_noreg", getMonitoringEvaluasiRIController);
  *         application/json:
  *           schema:
  *             type: object
+ *             example:
+ *               vc_noreg: "string"
+ *               vc_norm: "string"
+ *               dt_tanggal_monev: "string"
+ *               vc_keterangan_monev: "string"
+ *               vc_nama_ahli_gizi: "string"
  *     responses:
  *       200:
  *         description: Sukses menyimpan data
@@ -255,6 +261,12 @@ router.get("/monev-rj/save/:vc_noreg", getMonitoringEvaluasiRJController);
  *         application/json:
  *           schema:
  *             type: object
+ *             example:
+ *               vc_noreg: "string"
+ *               vc_norm: "string"
+ *               dt_tanggal_monev: "string"
+ *               vc_keterangan_monev: "string"
+ *               vc_nama_ahli_gizi: "string"
  *     responses:
  *       200:
  *         description: Sukses menyimpan data
@@ -341,6 +353,137 @@ router.get("/asuhan-gizi-ri/save/:no_reg", getSaveAsuhanGiziRIController);
  *         application/json:
  *           schema:
  *             type: object
+ *           examples:
+ *             Anak:
+ *               summary: Contoh Data Anak
+ *               value:
+ *                 vc_no_reg: "string"
+ *                 vc_no_rm: "string"
+ *                 dt_tanggal: "string"
+ *                 vc_nama_ahli_gizi: "string"
+ *                 bt_anak: "string"
+ *                 bt_aktif: "string"
+ *                 riwayat_gizi:
+ *                   vc_pola_makan: "string"
+ *                   bt_diit_konseling: "string"
+ *                   vc_diit_konseling: "string"
+ *                   bt_alergi_makanan: "string"
+ *                   vc_alergi_makanan: "string"
+ *                   bt_pantangan_makanan: "string"
+ *                   vc_pantangan_makanan: "string"
+ *                   bt_ketidaksukaan_makan: "string"
+ *                   vc_ketidaksukaan_makan: "string"
+ *                 antropometri:
+ *                   vc_bb: "string"
+ *                   vc_pb: "string"
+ *                   vc_tb: "string"
+ *                   vc_imt: "string"
+ *                   vc_bb_pb: "string"
+ *                   vc_bb_tb: "string"
+ *                   vc_lila: "string"
+ *                   vc_status_gizi: "string"
+ *                 vc_biokimia: "string"
+ *                 vc_pemeriksaan_penunjang: "string"
+ *                 fisik_klinis:
+ *                   bt_edema: "string"
+ *                   bt_asites: "string"
+ *                   bt_kesulitan_menghisap: "string"
+ *                   bt_nafsu_makan: "string"
+ *                   bt_gigi_geligi: "string"
+ *                   vc_fisik_lainnya: "string"
+ *                 riwayat_personal:
+ *                   vc_pendidikan: "string"
+ *                   bt_suplemen_obat: "string"
+ *                   vc_suplemen_obat: "string"
+ *                   vc_riwayat_penyakit_keluarga: "string"
+ *                   vc_riwayat_penyakit_dulu: "string"
+ *                   vc_riwayat_penyakit_sekarang: "string"
+ *                   vc_masalah_cerna: "string"
+ *                 vc_diagnosis_gizi: "string"
+ *                 intervensi_gizi:
+ *                   vc_tujuan_intervensi: "string"
+ *                   jenis:
+ *                     vc_jenis_diit: "string"
+ *                     vc_modifikasi_diit: "string"
+ *                     vc_bentuk: "string"
+ *                     vc_jadwal_pemberian_diit: "string"
+ *                     vc_jalur_makanan: "string"
+ *                   modifikasi:
+ *                     vc_modifikasi_diit: "string"
+ *                     vc_bentuk: "string"
+ *                     vc_jadwal_pemberian_diit: "string"
+ *                     vc_jalur_makanan: "string"
+ *                 vc_makanan_dianjurkan: "string"
+ *                 vc_makanan_tidak_dianjurkan: "string"
+ *                 monitoring_evaluasi:
+ *                   dt_tanggal: "string"
+ *                   vc_keterangan: "string"
+ *                   vc_paraf: "string"
+ *             Dewasa:
+ *               summary: Contoh Data Dewasa
+ *               value:
+ *                 vc_no_reg: "string"
+ *                 vc_no_rm: "string"
+ *                 dt_tanggal: "string"
+ *                 vc_nama_ahli_gizi: "string"
+ *                 bt_anak: "string"
+ *                 riwayat_gizi:
+ *                   vc_pola_makan: "string"
+ *                   bt_diit_konseling: "string"
+ *                   vc_diit_konseling: "string"
+ *                   bt_alergi_makanan: "string"
+ *                   vc_alergi_makanan: "string"
+ *                   bt_pantangan_makanan: "string"
+ *                   vc_pantangan_makanan: "string"
+ *                   bt_ketidaksukaan_makan: "string"
+ *                   vc_ketidaksukaan_makan: "string"
+ *                 antropometri:
+ *                   vc_bb: "string"
+ *                   vc_tb: "string"
+ *                   vc_imt: "string"
+ *                   vc_lila: "string"
+ *                   vc_persen_lila: "string"
+ *                   vc_status_gizi: "string"
+ *                 vc_biokimia: "string"
+ *                 vc_pemeriksaan_penunjang: "string"
+ *                 fisik_klinis:
+ *                   vc_sistole: "string"
+ *                   vc_diastole: "string"
+ *                   bt_edema: "string"
+ *                   bt_asites: "string"
+ *                   bt_nafsu_makan: "string"
+ *                   bt_gigi_geligi: "string"
+ *                   vc_fisik_lainnya: "string"
+ *                 riwayat_personal:
+ *                   vc_pekerjaan: "string"
+ *                   vc_pendidikan: "string"
+ *                   bt_perokok: "string"
+ *                   bt_suplemen_obat: "string"
+ *                   vc_suplemen_obat: "string"
+ *                   vc_riwayat_penyakit_keluarga: "string"
+ *                   vc_riwayat_penyakit_dulu: "string"
+ *                   vc_riwayat_penyakit_sekarang: "string"
+ *                   vc_masalah_cerna: "string"
+ *                 vc_diagnosis_gizi: "string"
+ *                 intervensi_gizi:
+ *                   vc_tujuan_intervensi: "string"
+ *                   jenis:
+ *                     vc_jenis_diit: "string"
+ *                     vc_modifikasi_diit: "string"
+ *                     vc_bentuk: "string"
+ *                     vc_jadwal_pemberian_diit: "string"
+ *                     vc_jalur_makanan: "string"
+ *                   modifikasi:
+ *                     vc_modifikasi_diit: "string"
+ *                     vc_bentuk: "string"
+ *                     vc_jadwal_pemberian_diit: "string"
+ *                     vc_jalur_makanan: "string"
+ *                 vc_makanan_dianjurkan: "string"
+ *                 vc_makanan_tidak_dianjurkan: "string"
+ *                 monitoring_evaluasi:
+ *                   dt_tanggal: "string"
+ *                   vc_keterangan: "string"
+ *                   vc_paraf: "string"
  *     responses:
  *       200:
  *         description: Sukses menyimpan data
@@ -395,6 +538,127 @@ router.get("/asuhan-gizi-rj/save/:no_reg", getSaveAsuhanGiziRJController);
  *         application/json:
  *           schema:
  *             type: object
+ *           examples:
+ *             Anak:
+ *               summary: Contoh Data Anak
+ *               value:
+ *                 vc_no_reg: "string"
+ *                 vc_no_rm: "string"
+ *                 dt_tanggal: "string"
+ *                 vc_nama_ahli_gizi: "string"
+ *                 vc_dokter_pengirim: "string"
+ *                 vc_diagnosa_medis: "string"
+ *                 bt_anak: "string"
+ *                 riwayat_gizi:
+ *                   vc_pola_makan: "string"
+ *                   bt_diit_konseling: "string"
+ *                   vc_diit_konseling: "string"
+ *                   bt_alergi_makanan: "string"
+ *                   vc_alergi_makanan: "string"
+ *                   bt_pantangan_makanan: "string"
+ *                   vc_pantangan_makanan: "string"
+ *                   bt_ketidaksukaan_makan: "string"
+ *                   vc_ketidaksukaan_makan: "string"
+ *                 antropometri:
+ *                   vc_bb: "string"
+ *                   vc_pb: "string"
+ *                   vc_tb: "string"
+ *                   vc_bb_pb: "string"
+ *                   vc_bb_u: "string"
+ *                   vc_pb_tb: "string"
+ *                   vc_lila: "string"
+ *                   vc_status_gizi: "string"
+ *                   vc_imt: "string"
+ *                 vc_biokimia: "string"
+ *                 vc_pemeriksaan_penunjang: "string"
+ *                 fisik_klinis:
+ *                   bt_edema: "string"
+ *                   bt_nafsu_makan: "string"
+ *                   bt_asites: "string"
+ *                   bt_gigi_geligi: "string"
+ *                   bt_kesulitan_menghisap: "string"
+ *                   vc_fisik_lainnya: "string"
+ *                 riwayat_personal:
+ *                   vc_pendidikan: "string"
+ *                   vc_riwayat_penyakit_keluarga: "string"
+ *                   vc_riwayat_penyakit_dulu: "string"
+ *                   vc_riwayat_penyakit_sekarang: "string"
+ *                   vc_masalah_cerna: "string"
+ *                   bt_suplemen_obat: "string"
+ *                   vc_suplemen_obat: "string"
+ *                 vc_diagnosis_gizi: "string"
+ *                 intervensi_gizi:
+ *                   vc_jenis_diit: "string"
+ *                   vc_tujuan: "string"
+ *                   vc_jadwal: "string"
+ *                   vc_makanan_dianjurkan: "string"
+ *                   vc_makanan_tidak_dianjurkan: "string"
+ *                   bt_leaflet: "string"
+ *                 monitoring_evaluasi:
+ *                   dt_tanggal: "string"
+ *                   vc_pola_makan: "string"
+ *                   vc_keterangan: "string"
+ *             Dewasa:
+ *               summary: Contoh Data Dewasa
+ *               value:
+ *                 vc_no_reg: "string"
+ *                 vc_no_rm: "string"
+ *                 dt_tanggal: "string"
+ *                 vc_nama_ahli_gizi: "string"
+ *                 vc_dokter_pengirim: "string"
+ *                 vc_diagnosa_medis: "string"
+ *                 bt_anak: "string"
+ *                 riwayat_gizi:
+ *                   vc_anamnesa_riwayat_makan: "string"
+ *                   vc_pola_makan: "string"
+ *                   bt_diit_konseling: "string"
+ *                   vc_diit_konseling: "string"
+ *                   bt_alergi_makanan: "string"
+ *                   vc_alergi_makanan: "string"
+ *                   bt_pantangan_makanan: "string"
+ *                   vc_pantangan_makanan: "string"
+ *                   bt_ketidaksukaan_makan: "string"
+ *                   vc_ketidaksukaan_makan: "string"
+ *                 antropometri:
+ *                   vc_bb: "string"
+ *                   vc_tb: "string"
+ *                   vc_imt: "string"
+ *                   vc_bbi: "string"
+ *                   vc_lila: "string"
+ *                   vc_persen_lila: "string"
+ *                   vc_status_gizi: "string"
+ *                 vc_biokimia: "string"
+ *                 vc_pemeriksaan_penunjang: "string"
+ *                 fisik_klinis:
+ *                   vc_sistole: "string"
+ *                   vc_diastole: "string"
+ *                   bt_edema: "string"
+ *                   bt_nafsu_makan: "string"
+ *                   bt_asites: "string"
+ *                   bt_gigi_geligi: "string"
+ *                   vc_fisik_lainnya: "string"
+ *                 riwayat_personal:
+ *                   vc_pekerjaan: "string"
+ *                   vc_pendidikan: "string"
+ *                   vc_riwayat_penyakit_keluarga: "string"
+ *                   vc_riwayat_penyakit_dulu: "string"
+ *                   vc_riwayat_penyakit_sekarang: "string"
+ *                   vc_masalah_cerna: "string"
+ *                   bt_perokok: "string"
+ *                   bt_suplemen_obat: "string"
+ *                   vc_suplemen_obat: "string"
+ *                 vc_diagnosis_gizi: "string"
+ *                 intervensi_gizi:
+ *                   vc_jenis_diit: "string"
+ *                   vc_tujuan: "string"
+ *                   vc_jadwal: "string"
+ *                   vc_makanan_dianjurkan: "string"
+ *                   vc_makanan_tidak_dianjurkan: "string"
+ *                   bt_leaflet: "string"
+ *                 monitoring_evaluasi:
+ *                   dt_tanggal: "string"
+ *                   vc_pola_makan: "string"
+ *                   vc_keterangan: "string"
  *     responses:
  *       200:
  *         description: Sukses menyimpan data
