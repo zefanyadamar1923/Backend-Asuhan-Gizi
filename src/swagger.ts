@@ -2,7 +2,7 @@ import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { Application } from "express";
 
-const options = {
+const options: swaggerJSDoc.Options = {
   definition: {
     openapi: "3.0.0",
     info: {
@@ -17,10 +17,22 @@ const options = {
       },
     ],
   },
-  apis: ["./src/routes/*.ts", "./src/controllers/*.ts"],
+  apis: [
+    "./src/routes/*.ts",
+    "./src/routes/*.js",
+    "./src/controllers/*.ts",
+    "./src/controllers/*.js",
+    "./dist/routes/*.js",
+    "./dist/controllers/*.js",
+  ],
 };
 
-const swaggerSpec = swaggerJSDoc(options);
+let swaggerSpec = {};
+try {
+  swaggerSpec = swaggerJSDoc(options);
+} catch (error) {
+  console.error("❌ Gagal memuat dokumentasi Swagger JSDoc:", error);
+}
 
 export const setupSwagger = (app: Application, port: number) => {
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
