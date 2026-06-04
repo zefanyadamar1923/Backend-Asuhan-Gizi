@@ -74,7 +74,7 @@ export const getRiwayatKunjung = async (vc_norm: string) => {
                     b.vc_diagnosa_medis,
                     b.bt_aktif
                 FROM RMKUNJUNG a
-                INNER JOIN _GiziAsuhanGiziRJ b ON a.vc_no_regj = b.vc_no_reg
+                INNER JOIN _Gizi_AsuhanGizi b ON a.vc_no_regj = b.vc_no_reg
                 WHERE b.vc_no_rm = @vc_norm and b.bt_aktif = '1'
             `);
         return result.recordset;

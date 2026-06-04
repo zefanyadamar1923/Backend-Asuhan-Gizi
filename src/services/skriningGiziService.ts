@@ -1,8 +1,8 @@
 import { poolPromise } from '../config/db';
 import { logger } from '../utils/logger';
-import { ISkriningGiziRI } from '../@types';
+import { ISkriningGizi } from '../@types';
 
-export const getSkriningGiziRI = async (noReg: string): Promise<ISkriningGiziRI | null> => {
+export const getSkriningGizi = async (noReg: string): Promise<ISkriningGizi | null> => {
   try {
     const pool = await poolPromise;
     const request = pool.request();
@@ -76,12 +76,12 @@ export const getSkriningGiziRI = async (noReg: string): Promise<ISkriningGiziRI 
     const result = await request.query(query);
 
     if (result.recordset && result.recordset.length > 0) {
-      return result.recordset[0] as ISkriningGiziRI;
+      return result.recordset[0] as ISkriningGizi;
     }
 
     return null;
   } catch (error) {
-    logger.error('Error in getSkriningGiziAnakRI', error);
+    logger.error('Error in getSkriningGizi', error);
     throw error;
   }
 };

@@ -1,15 +1,10 @@
 import { Router } from "express";
 import { loginUser } from "../controllers/loginController";
 import {
-  getAsuhanGiziRIController,
-  getSaveAsuhanGiziRIController,
-  saveAsuhanGiziRIController,
-} from "../controllers/formAsuhanGiziRIController";
-import {
-  getAsuhanGiziRJController,
-  getSaveAsuhanGiziRJController,
-  saveAsuhanGiziRJController,
-} from "../controllers/formAsuhanGiziRJController";
+  getAsuhanGiziController,
+  getSaveAsuhanGiziController,
+  saveAsuhanGiziController,
+} from "../controllers/formAsuhanGiziController";
 import { getPasienRJController } from "../controllers/getPasienRJController";
 import { getPasienRIController } from "../controllers/getPasienRIController";
 import {
@@ -19,12 +14,10 @@ import {
   getJenisDiitController,
   getRiwayatKunjungController,
 } from "../controllers/dataController";
-import { getSkriningGiziRIController } from "../controllers/getSkriningGiziRIController";
+import { getSkriningGiziController } from "../controllers/getSkriningGiziController";
 import {
-  getMonitoringEvaluasiRIController,
-  getMonitoringEvaluasiRJController,
-  saveMonitoringEvaluasiRIController,
-  saveMonitoringEvaluasiRJController,
+  getMonitoringEvaluasiController,
+  saveMonitoringEvaluasiController,
 } from "../controllers/monevController";
 
 const router = Router();
@@ -191,9 +184,9 @@ router.get("/riwayat-kunjung/:vc_norm", getRiwayatKunjungController);
 
 /**
  * @swagger
- * /monev-ri/save/{vc_noreg}:
+ * /monev/save/{vc_noreg}:
  *   get:
- *     summary: Mendapatkan data form save Monitoring Evaluasi Rawat Inap
+ *     summary: Mendapatkan data form save Monitoring Evaluasi
  *     tags: [Monitoring Evaluasi]
  *     parameters:
  *       - in: path
@@ -205,13 +198,13 @@ router.get("/riwayat-kunjung/:vc_norm", getRiwayatKunjungController);
  *       200:
  *         description: Sukses mendapatkan data
  */
-router.get("/monev-ri/save/:vc_noreg", getMonitoringEvaluasiRIController);
+router.get("/monev/save/:vc_noreg", getMonitoringEvaluasiController);
 
 /**
  * @swagger
- * /monev-ri:
+ * /monev:
  *   post:
- *     summary: Menyimpan data Monitoring Evaluasi Rawat Inap
+ *     summary: Menyimpan data Monitoring Evaluasi
  *     tags: [Monitoring Evaluasi]
  *     requestBody:
  *       required: true
@@ -225,53 +218,12 @@ router.get("/monev-ri/save/:vc_noreg", getMonitoringEvaluasiRIController);
  *               dt_tanggal_monev: "string"
  *               vc_keterangan_monev: "string"
  *               vc_nama_ahli_gizi: "string"
+ *               bt_ranap: "string"
  *     responses:
  *       200:
  *         description: Sukses menyimpan data
  */
-router.post("/monev-ri", saveMonitoringEvaluasiRIController);
-
-/**
- * @swagger
- * /monev-rj/save/{vc_noreg}:
- *   get:
- *     summary: Mendapatkan data form save Monitoring Evaluasi Rawat Jalan
- *     tags: [Monitoring Evaluasi]
- *     parameters:
- *       - in: path
- *         name: vc_noreg
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Sukses mendapatkan data
- */
-router.get("/monev-rj/save/:vc_noreg", getMonitoringEvaluasiRJController);
-
-/**
- * @swagger
- * /monev-rj:
- *   post:
- *     summary: Menyimpan data Monitoring Evaluasi Rawat Jalan
- *     tags: [Monitoring Evaluasi]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             example:
- *               vc_noreg: "string"
- *               vc_norm: "string"
- *               dt_tanggal_monev: "string"
- *               vc_keterangan_monev: "string"
- *               vc_nama_ahli_gizi: "string"
- *     responses:
- *       200:
- *         description: Sukses menyimpan data
- */
-router.post("/monev-rj", saveMonitoringEvaluasiRJController);
+router.post("/monev", saveMonitoringEvaluasiController);
 
 /**
  * @swagger
@@ -282,7 +234,7 @@ router.post("/monev-rj", saveMonitoringEvaluasiRJController);
 
 /**
  * @swagger
- * /skrining-gizi-ri/{no_reg}:
+ * /skrining-gizi/{no_reg}:
  *   get:
  *     summary: Mendapatkan data skrining gizi rawat inap
  *     tags: [Skrining Gizi]
@@ -296,7 +248,7 @@ router.post("/monev-rj", saveMonitoringEvaluasiRJController);
  *       200:
  *         description: Sukses mendapatkan data
  */
-router.get("/skrining-gizi-ri/:no_reg", getSkriningGiziRIController);
+router.get("/skrining-gizi/:no_reg", getSkriningGiziController);
 
 /**
  * @swagger
@@ -307,7 +259,7 @@ router.get("/skrining-gizi-ri/:no_reg", getSkriningGiziRIController);
 
 /**
  * @swagger
- * /asuhan-gizi-ri/{no_reg}:
+ * /asuhan-gizi/{no_reg}:
  *   get:
  *     summary: Mendapatkan data asuhan gizi rawat inap
  *     tags: [Asuhan Gizi]
@@ -321,11 +273,11 @@ router.get("/skrining-gizi-ri/:no_reg", getSkriningGiziRIController);
  *       200:
  *         description: Sukses mendapatkan data
  */
-router.get("/asuhan-gizi-ri/:no_reg", getAsuhanGiziRIController);
+router.get("/asuhan-gizi/:no_reg", getAsuhanGiziController);
 
 /**
  * @swagger
- * /asuhan-gizi-ri/save/{no_reg}:
+ * /asuhan-gizi/save/{no_reg}:
  *   get:
  *     summary: Mendapatkan data form save asuhan gizi rawat inap
  *     tags: [Asuhan Gizi]
@@ -339,11 +291,11 @@ router.get("/asuhan-gizi-ri/:no_reg", getAsuhanGiziRIController);
  *       200:
  *         description: Sukses mendapatkan data
  */
-router.get("/asuhan-gizi-ri/save/:no_reg", getSaveAsuhanGiziRIController);
+router.get("/asuhan-gizi/save/:no_reg", getSaveAsuhanGiziController);
 
 /**
  * @swagger
- * /asuhan-gizi-ri:
+ * /asuhan-gizi:
  *   post:
  *     summary: Menyimpan data asuhan gizi rawat inap
  *     tags: [Asuhan Gizi]
@@ -354,14 +306,15 @@ router.get("/asuhan-gizi-ri/save/:no_reg", getSaveAsuhanGiziRIController);
  *           schema:
  *             type: object
  *           examples:
- *             Anak:
- *               summary: Contoh Data Anak
+ *             RawatInap:
+ *               summary: Contoh Data Rawat Inap (RI)
  *               value:
  *                 vc_no_reg: "string"
  *                 vc_no_rm: "string"
  *                 dt_tanggal: "string"
  *                 vc_nama_ahli_gizi: "string"
  *                 bt_anak: "string"
+ *                 bt_ranap: "1"
  *                 bt_aktif: "string"
  *                 riwayat_gizi:
  *                   vc_pola_makan: "string"
@@ -378,69 +331,9 @@ router.get("/asuhan-gizi-ri/save/:no_reg", getSaveAsuhanGiziRIController);
  *                   vc_pb: "string"
  *                   vc_tb: "string"
  *                   vc_imt: "string"
+ *                   vc_bbi: "string"
  *                   vc_bb_pb: "string"
  *                   vc_bb_tb: "string"
- *                   vc_lila: "string"
- *                   vc_status_gizi: "string"
- *                 vc_biokimia: "string"
- *                 vc_pemeriksaan_penunjang: "string"
- *                 fisik_klinis:
- *                   bt_edema: "string"
- *                   bt_asites: "string"
- *                   bt_kesulitan_menghisap: "string"
- *                   bt_nafsu_makan: "string"
- *                   bt_gigi_geligi: "string"
- *                   vc_fisik_lainnya: "string"
- *                 riwayat_personal:
- *                   vc_pendidikan: "string"
- *                   bt_suplemen_obat: "string"
- *                   vc_suplemen_obat: "string"
- *                   vc_riwayat_penyakit_keluarga: "string"
- *                   vc_riwayat_penyakit_dulu: "string"
- *                   vc_riwayat_penyakit_sekarang: "string"
- *                   vc_masalah_cerna: "string"
- *                 vc_diagnosis_gizi: "string"
- *                 intervensi_gizi:
- *                   vc_tujuan_intervensi: "string"
- *                   jenis:
- *                     vc_jenis_diit: "string"
- *                     vc_modifikasi_diit: "string"
- *                     vc_bentuk: "string"
- *                     vc_jadwal_pemberian_diit: "string"
- *                     vc_jalur_makanan: "string"
- *                   modifikasi:
- *                     vc_modifikasi_diit: "string"
- *                     vc_bentuk: "string"
- *                     vc_jadwal_pemberian_diit: "string"
- *                     vc_jalur_makanan: "string"
- *                 vc_makanan_dianjurkan: "string"
- *                 vc_makanan_tidak_dianjurkan: "string"
- *                 monitoring_evaluasi:
- *                   dt_tanggal: "string"
- *                   vc_keterangan: "string"
- *                   vc_paraf: "string"
- *             Dewasa:
- *               summary: Contoh Data Dewasa
- *               value:
- *                 vc_no_reg: "string"
- *                 vc_no_rm: "string"
- *                 dt_tanggal: "string"
- *                 vc_nama_ahli_gizi: "string"
- *                 bt_anak: "string"
- *                 riwayat_gizi:
- *                   vc_pola_makan: "string"
- *                   bt_diit_konseling: "string"
- *                   vc_diit_konseling: "string"
- *                   bt_alergi_makanan: "string"
- *                   vc_alergi_makanan: "string"
- *                   bt_pantangan_makanan: "string"
- *                   vc_pantangan_makanan: "string"
- *                   bt_ketidaksukaan_makan: "string"
- *                   vc_ketidaksukaan_makan: "string"
- *                 antropometri:
- *                   vc_bb: "string"
- *                   vc_tb: "string"
- *                   vc_imt: "string"
  *                   vc_lila: "string"
  *                   vc_persen_lila: "string"
  *                   vc_status_gizi: "string"
@@ -451,6 +344,7 @@ router.get("/asuhan-gizi-ri/save/:no_reg", getSaveAsuhanGiziRIController);
  *                   vc_diastole: "string"
  *                   bt_edema: "string"
  *                   bt_asites: "string"
+ *                   bt_kesulitan_menghisap: "string"
  *                   bt_nafsu_makan: "string"
  *                   bt_gigi_geligi: "string"
  *                   vc_fisik_lainnya: "string"
@@ -465,11 +359,15 @@ router.get("/asuhan-gizi-ri/save/:no_reg", getSaveAsuhanGiziRIController);
  *                   vc_riwayat_penyakit_sekarang: "string"
  *                   vc_masalah_cerna: "string"
  *                 vc_diagnosis_gizi: "string"
+ *                 diagnosis:
+ *                   - vc_etiologi: "string"
+ *                     vc_sign_symptoms: "string"
+ *                     vc_rangkuman_diagnosis: "string"
  *                 intervensi_gizi:
  *                   vc_tujuan_intervensi: "string"
  *                   jenis:
+ *                     vc_jenis_makanan: "string"
  *                     vc_jenis_diit: "string"
- *                     vc_modifikasi_diit: "string"
  *                     vc_bentuk: "string"
  *                     vc_jadwal_pemberian_diit: "string"
  *                     vc_jalur_makanan: "string"
@@ -480,75 +378,18 @@ router.get("/asuhan-gizi-ri/save/:no_reg", getSaveAsuhanGiziRIController);
  *                     vc_jalur_makanan: "string"
  *                 vc_makanan_dianjurkan: "string"
  *                 vc_makanan_tidak_dianjurkan: "string"
- *                 monitoring_evaluasi:
- *                   dt_tanggal: "string"
- *                   vc_keterangan: "string"
- *                   vc_paraf: "string"
- *     responses:
- *       200:
- *         description: Sukses menyimpan data
- */
-router.post("/asuhan-gizi-ri", saveAsuhanGiziRIController);
-
-/**
- * @swagger
- * /asuhan-gizi-rj/{no_reg}:
- *   get:
- *     summary: Mendapatkan data asuhan gizi rawat jalan
- *     tags: [Asuhan Gizi]
- *     parameters:
- *       - in: path
- *         name: no_reg
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Sukses mendapatkan data
- */
-router.get("/asuhan-gizi-rj/:no_reg", getAsuhanGiziRJController);
-
-/**
- * @swagger
- * /asuhan-gizi-rj/save/{no_reg}:
- *   get:
- *     summary: Mendapatkan data form save asuhan gizi rawat jalan
- *     tags: [Asuhan Gizi]
- *     parameters:
- *       - in: path
- *         name: no_reg
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Sukses mendapatkan data
- */
-router.get("/asuhan-gizi-rj/save/:no_reg", getSaveAsuhanGiziRJController);
-
-/**
- * @swagger
- * /asuhan-gizi-rj:
- *   post:
- *     summary: Menyimpan data asuhan gizi rawat jalan
- *     tags: [Asuhan Gizi]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *           examples:
- *             Anak:
- *               summary: Contoh Data Anak
+ *             RawatJalan:
+ *               summary: Contoh Data Rawat Jalan (RJ)
  *               value:
  *                 vc_no_reg: "string"
  *                 vc_no_rm: "string"
  *                 dt_tanggal: "string"
  *                 vc_nama_ahli_gizi: "string"
+ *                 bt_anak: "string"
+ *                 bt_ranap: "0"
+ *                 bt_aktif: "string"
  *                 vc_dokter_pengirim: "string"
  *                 vc_diagnosa_medis: "string"
- *                 bt_anak: "string"
  *                 riwayat_gizi:
  *                   vc_pola_makan: "string"
  *                   bt_diit_konseling: "string"
@@ -563,106 +404,52 @@ router.get("/asuhan-gizi-rj/save/:no_reg", getSaveAsuhanGiziRJController);
  *                   vc_bb: "string"
  *                   vc_pb: "string"
  *                   vc_tb: "string"
- *                   vc_bb_pb: "string"
- *                   vc_bb_u: "string"
- *                   vc_pb_tb: "string"
- *                   vc_lila: "string"
- *                   vc_status_gizi: "string"
- *                   vc_imt: "string"
- *                 vc_biokimia: "string"
- *                 vc_pemeriksaan_penunjang: "string"
- *                 fisik_klinis:
- *                   bt_edema: "string"
- *                   bt_nafsu_makan: "string"
- *                   bt_asites: "string"
- *                   bt_gigi_geligi: "string"
- *                   bt_kesulitan_menghisap: "string"
- *                   vc_fisik_lainnya: "string"
- *                 riwayat_personal:
- *                   vc_pendidikan: "string"
- *                   vc_riwayat_penyakit_keluarga: "string"
- *                   vc_riwayat_penyakit_dulu: "string"
- *                   vc_riwayat_penyakit_sekarang: "string"
- *                   vc_masalah_cerna: "string"
- *                   bt_suplemen_obat: "string"
- *                   vc_suplemen_obat: "string"
- *                 vc_diagnosis_gizi: "string"
- *                 intervensi_gizi:
- *                   vc_jenis_diit: "string"
- *                   vc_tujuan: "string"
- *                   vc_jadwal: "string"
- *                   vc_makanan_dianjurkan: "string"
- *                   vc_makanan_tidak_dianjurkan: "string"
- *                   bt_leaflet: "string"
- *                 monitoring_evaluasi:
- *                   dt_tanggal: "string"
- *                   vc_pola_makan: "string"
- *                   vc_keterangan: "string"
- *             Dewasa:
- *               summary: Contoh Data Dewasa
- *               value:
- *                 vc_no_reg: "string"
- *                 vc_no_rm: "string"
- *                 dt_tanggal: "string"
- *                 vc_nama_ahli_gizi: "string"
- *                 vc_dokter_pengirim: "string"
- *                 vc_diagnosa_medis: "string"
- *                 bt_anak: "string"
- *                 riwayat_gizi:
- *                   vc_anamnesa_riwayat_makan: "string"
- *                   vc_pola_makan: "string"
- *                   bt_diit_konseling: "string"
- *                   vc_diit_konseling: "string"
- *                   bt_alergi_makanan: "string"
- *                   vc_alergi_makanan: "string"
- *                   bt_pantangan_makanan: "string"
- *                   vc_pantangan_makanan: "string"
- *                   bt_ketidaksukaan_makan: "string"
- *                   vc_ketidaksukaan_makan: "string"
- *                 antropometri:
- *                   vc_bb: "string"
- *                   vc_tb: "string"
  *                   vc_imt: "string"
  *                   vc_bbi: "string"
+ *                   vc_status_gizi: "string"
+ *                   vc_bb_u: "string"
+ *                   vc_pb_tb: "string"
+ *                   vc_bb_bp: "string"
  *                   vc_lila: "string"
  *                   vc_persen_lila: "string"
- *                   vc_status_gizi: "string"
  *                 vc_biokimia: "string"
  *                 vc_pemeriksaan_penunjang: "string"
  *                 fisik_klinis:
  *                   vc_sistole: "string"
  *                   vc_diastole: "string"
  *                   bt_edema: "string"
- *                   bt_nafsu_makan: "string"
  *                   bt_asites: "string"
+ *                   bt_kesulitan_menghisap: "string"
+ *                   bt_nafsu_makan: "string"
  *                   bt_gigi_geligi: "string"
  *                   vc_fisik_lainnya: "string"
  *                 riwayat_personal:
  *                   vc_pekerjaan: "string"
  *                   vc_pendidikan: "string"
+ *                   bt_perokok: "string"
+ *                   bt_suplemen_obat: "string"
+ *                   vc_suplemen_obat: "string"
  *                   vc_riwayat_penyakit_keluarga: "string"
  *                   vc_riwayat_penyakit_dulu: "string"
  *                   vc_riwayat_penyakit_sekarang: "string"
  *                   vc_masalah_cerna: "string"
- *                   bt_perokok: "string"
- *                   bt_suplemen_obat: "string"
- *                   vc_suplemen_obat: "string"
  *                 vc_diagnosis_gizi: "string"
+ *                 diagnosis:
+ *                   - vc_etiologi: "string"
+ *                     vc_sign_symptoms: "string"
+ *                     vc_rangkuman_diagnosis: "string"
  *                 intervensi_gizi:
+ *                   vc_jenis_makanan: "string"
  *                   vc_jenis_diit: "string"
- *                   vc_tujuan: "string"
+ *                   vc_tujuan_intervensi: "string"
  *                   vc_jadwal: "string"
  *                   vc_makanan_dianjurkan: "string"
  *                   vc_makanan_tidak_dianjurkan: "string"
  *                   bt_leaflet: "string"
- *                 monitoring_evaluasi:
- *                   dt_tanggal: "string"
- *                   vc_pola_makan: "string"
- *                   vc_keterangan: "string"
  *     responses:
  *       200:
  *         description: Sukses menyimpan data
  */
-router.post("/asuhan-gizi-rj", saveAsuhanGiziRJController);
+router.post("/asuhan-gizi", saveAsuhanGiziController);
 
 export default router;
