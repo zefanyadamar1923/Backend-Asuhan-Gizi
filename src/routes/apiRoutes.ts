@@ -13,6 +13,7 @@ import {
   getSDMDokterController,
   getJenisDiitController,
   getRiwayatKunjungController,
+  getDiagnosisGiziController,
 } from "../controllers/dataController";
 import { getSkriningGiziController } from "../controllers/getSkriningGiziController";
 import {
@@ -174,6 +175,18 @@ router.get("/jenis-diit", getJenisDiitController);
  *         description: Sukses mendapatkan data
  */
 router.get("/riwayat-kunjung/:vc_norm", getRiwayatKunjungController);
+
+/**
+ * @swagger
+ * /diagnosis:
+ *   get:
+ *     summary: Mendapatkan data diagnosis gizi
+ *     tags: [Referensi]
+ *     responses:
+ *       200:
+ *         description: Sukses mendapatkan data
+ */
+router.get("/diagnosis", getDiagnosisGiziController);
 
 /**
  * @swagger

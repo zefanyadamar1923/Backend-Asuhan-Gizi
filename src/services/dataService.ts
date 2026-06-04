@@ -83,3 +83,17 @@ export const getRiwayatKunjung = async (vc_norm: string) => {
         throw error;
     }
 }
+
+export const getDiagnosisGizi = async () => {
+    try {
+        const pool = await poolPromise;
+        const result = await pool.request()
+            .query(`
+                SELECT * FROM _Gizi_DiagnosisGizi
+            `);
+        return result.recordset;
+    } catch (error) {
+        logger.error("Error in getDiagnosisGizi", error);
+        throw error;
+    }
+}

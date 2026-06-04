@@ -63,7 +63,8 @@ export const getSaveAsuhanGizi = async (vc_no_reg: string) => {
         a.*,
         d.vc_etiologi,
         d.vc_sign_symptoms,
-        d.vc_rangkuman_diagnosis
+        d.vc_rangkuman_diagnosis,
+        d.vc_problem
       FROM _Gizi_AsuhanGizi a
       LEFT JOIN _Gizi_AsuhanGizi_Diagnosis d ON a.vc_id = d.vc_id_asuhan
       WHERE a.vc_no_reg = @vc_no_reg AND a.bt_aktif = '1'
@@ -79,14 +80,16 @@ export const getSaveAsuhanGizi = async (vc_no_reg: string) => {
     delete asuhan.vc_etiologi;
     delete asuhan.vc_sign_symptoms;
     delete asuhan.vc_rangkuman_diagnosis;
+    delete asuhan.vc_problem;
 
     // Kumpulkan semua baris diagnosis (jika ada)
     asuhan.diagnosis = rows
-      .filter((r: any) => r.vc_etiologi !== null || r.vc_sign_symptoms !== null || r.vc_rangkuman_diagnosis !== null)
+      .filter((r: any) => r.vc_etiologi !== null || r.vc_sign_symptoms !== null || r.vc_rangkuman_diagnosis !== null || r.vc_problem !== null)
       .map((r: any) => ({
         vc_etiologi: r.vc_etiologi,
         vc_sign_symptoms: r.vc_sign_symptoms,
         vc_rangkuman_diagnosis: r.vc_rangkuman_diagnosis,
+        vc_problem: r.vc_problem
       }));
 
     return asuhan;
@@ -291,12 +294,13 @@ export const saveAsuhanGizi = async (data: IAsuhanGizi) => {
         reqDiag.input("vc_etiologi", diag.vc_etiologi);
         reqDiag.input("vc_sign_symptoms", diag.vc_sign_symptoms);
         reqDiag.input("vc_rangkuman_diagnosis", diag.vc_rangkuman_diagnosis);
+        reqDiag.input("vc_problem", diag.vc_problem);
 
         await reqDiag.query(`
           INSERT INTO _Gizi_AsuhanGizi_Diagnosis (
-            vc_id_asuhan, vc_etiologi, vc_sign_symptoms, vc_rangkuman_diagnosis
+            vc_id_asuhan, vc_etiologi, vc_sign_symptoms, vc_rangkuman_diagnosis, vc_problem
           ) VALUES (
-            @vc_id_asuhan, @vc_etiologi, @vc_sign_symptoms, @vc_rangkuman_diagnosis
+            @vc_id_asuhan, @vc_etiologi, @vc_sign_symptoms, @vc_rangkuman_diagnosis, @vc_problem
           )
         `);
       }

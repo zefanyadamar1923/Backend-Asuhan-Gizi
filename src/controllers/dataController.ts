@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { logger } from '../utils/logger';
-import { IApiResponse, IDataPddk, IDataPekerjaan, IDataJenisDiit, IDataSDMDokter, IDataRiwayatKunjung } from '../@types';
-import { getDataPddk, getDataPekerjaan, getDataSDMDokter, getDataJenisDiit, getRiwayatKunjung } from '../services/dataService';
+import { IApiResponse, IDataPddk, IDataPekerjaan, IDataJenisDiit, IDataSDMDokter, IDataRiwayatKunjung, IDataDiagnosisGizi } from '../@types';
+import { getDataPddk, getDataPekerjaan, getDataSDMDokter, getDataJenisDiit, getRiwayatKunjung, getDiagnosisGizi } from '../services/dataService';
 
 export const getPddkController = async (req: Request, res: Response) => {
     const response: IApiResponse = {
@@ -109,6 +109,26 @@ export const getRiwayatKunjungController = async (req: Request, res: Response) =
     } catch (error: any) {
         logger.error(error, "Error getting Riwayat Kunjung");
         response.message = "Gagal mengambil data Riwayat Kunjung";
+        res.status(500).json(response);
+    }
+}
+
+export const getDiagnosisGiziController = async (req: Request, res: Response) => {
+    const response: IApiResponse = {
+        success: false,
+        message: "",
+    };
+
+    try {
+        const result = await getDiagnosisGizi();
+
+        response.success = true;
+        response.message = "Data berhasil diambil";
+        response.data = result as IDataDiagnosisGizi[];
+        res.status(200).json(response);
+    } catch (error: any) {
+        logger.error(error, "Error getting Diagnosis Gizi");
+        response.message = "Gagal mengambil data Diagnosis Gizi";
         res.status(500).json(response);
     }
 }

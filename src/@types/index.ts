@@ -77,6 +77,11 @@ export interface IDataRiwayatKunjung {
   bt_aktif?: string;
 }
 
+export interface IDataDiagnosisGizi {
+  vc_kode: string;
+  vc_nama: string;
+}
+
 export interface ISkriningGizi {
   _ASKEPIGD_SkriningGizi: {
     vc_NoReg: string;
@@ -208,6 +213,7 @@ export interface IAsuhanGizi {
     vc_etiologi?: string;
     vc_sign_symptoms?: string;
     vc_rangkuman_diagnosis?: string;
+    vc_problem?: string;
   }>;
 
   // Intervensi Gizi digabung karena ada variasi struktur RI (menggunakan sub-objek) dan RJ (flat)
