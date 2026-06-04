@@ -376,6 +376,7 @@ router.get("/asuhan-gizi/save/:no_reg", getSaveAsuhanGiziController);
  *                   - vc_etiologi: "string"
  *                     vc_sign_symptoms: "string"
  *                     vc_rangkuman_diagnosis: "string"
+ *                     vc_problem: "string"
  *                 intervensi_gizi:
  *                   vc_tujuan_intervensi: "string"
  *                   jenis:
@@ -451,6 +452,7 @@ router.get("/asuhan-gizi/save/:no_reg", getSaveAsuhanGiziController);
  *                   - vc_etiologi: "string"
  *                     vc_sign_symptoms: "string"
  *                     vc_rangkuman_diagnosis: "string"
+ *                     vc_problem: "string"
  *                 intervensi_gizi:
  *                   vc_jenis_makanan: "string"
  *                   vc_jenis_diit: "string"
