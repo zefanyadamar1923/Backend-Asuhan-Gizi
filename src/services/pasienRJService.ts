@@ -26,7 +26,7 @@ export const getPasienRJ = async (tanggal?: string) => {
         LEFT JOIN RMKLINIK c ON a.VC_K_KLINIK = c.vc_K_KLINIK
         LEFT JOIN PubKerja d ON b.vc_k_pek = d.vc_kode
         LEFT JOIN PubPddk e ON b.vc_k_pend = e.vc_kode
-        LEFT JOIN _GiziAsuhanGiziRJ ag ON a.VC_NO_REGJ = ag.vc_no_reg AND ag.bt_aktif = '1'
+        LEFT JOIN _Gizi_AsuhanGizi ag ON a.VC_NO_REGJ = ag.vc_no_reg AND ag.bt_aktif = '1'
         WHERE a.vc_K_KLINIK = '2200'
     `;
 

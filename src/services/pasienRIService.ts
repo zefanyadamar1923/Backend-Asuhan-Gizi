@@ -45,7 +45,7 @@ export const getPasienRI = async (
             UNION
             SELECT vc_NoReg, bt_SkriningAnak FROM _AskepRajal_SkriningGizi
         ) s ON s.vc_NoReg IN (a.vc_no_reg, a.vc_no_regj_ralan)
-        LEFT JOIN _GiziAsuhanGiziRI ag ON ag.vc_no_reg IN (a.vc_no_reg, a.vc_no_regj_ralan) AND ag.bt_aktif = '1'
+        LEFT JOIN _Gizi_AsuhanGizi ag ON ag.vc_no_reg IN (a.vc_no_reg, a.vc_no_regj_ralan) AND ag.bt_aktif = '1'
         WHERE (
           CASE 
             WHEN ISNULL(a.vc_kd_Ruang_mutasi, '') = '' THEN a.vc_kd_Ruang_masuk
