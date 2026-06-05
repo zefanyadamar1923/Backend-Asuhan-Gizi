@@ -14,7 +14,7 @@ const options: swaggerJSDoc.Options = {
     },
     servers: [
       {
-        url: isProduction ? "http://10.10.0.88/api-asuhangizi" : "/api",
+        url: isProduction ? "http://10.10.0.88/api-asuhangizi/api" : "/api",
         description: isProduction ? "Production Server" : "Local Development",
       },
     ],
