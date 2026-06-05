@@ -21,6 +21,7 @@ import {
   getMonitoringEvaluasiController,
   saveMonitoringEvaluasiController,
 } from "../controllers/monevController";
+import { getTtdController } from "../controllers/ttdController";
 
 const router = Router();
 
@@ -207,6 +208,25 @@ router.get("/diagnosis", getDiagnosisGiziController);
  *         description: Sukses mendapatkan data
  */
 router.get("/sdm-karyawan/:vc_nik", getSDMKaryawanController);
+
+/**
+ * @swagger
+ * /ttd/{nik}:
+ *   get:
+ *     summary: Mendapatkan file tanda tangan berdasarkan NIK
+ *     tags: [Referensi]
+ *     parameters:
+ *       - in: path
+ *         name: nik
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Nomor Induk Karyawan / Ahli Gizi
+ *     responses:
+ *       200:
+ *         description: Sukses mendapatkan data
+ */
+router.get("/ttd/:nik", getTtdController);
 
 /**
  * @swagger
