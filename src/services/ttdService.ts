@@ -15,5 +15,6 @@ export const getTtdFilePath = (nik: string): string => {
 
   // path.join secara otomatis akan menyesuaikan separator sesuai OS:
   // Windows: \  |  Linux: /
+  console.log(path.join(basePath, `${nik}.png`));
   return path.join(basePath, `${nik}.png`);
 };
