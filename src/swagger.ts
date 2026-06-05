@@ -12,10 +12,17 @@ const options: swaggerJSDoc.Options = {
       version: "1.0.0",
       description: "Dokumentasi API untuk Backend Asuhan Gizi",
     },
+    //  SOLUSI: Menggunakan Relative Path agar adaptif terhadap Nginx Proxy
     servers: [
       {
-        url: isProduction ? "http://10.10.0.88/api-asuhangizi/api" : "/api",
+        // Jika di production diakses lewat sub-path Nginx, arahkan langsung ke root relative-nya
+        url: isProduction ? "/api-asuhangizi/api" : "/api",
         description: isProduction ? "Production Server" : "Local Development",
+      },
+      //  TIPS TAMBAHAN: Anda juga bisa menyediakan opsi fallback langsung ke port internal container jika diperlukan
+      {
+        url: "/api",
+        description: "Direct API Relative Path",
       },
     ],
   },
