@@ -78,8 +78,13 @@ export interface IDataRiwayatKunjung {
 }
 
 export interface IDataDiagnosisGizi {
-  vc_kode: string;
-  vc_nama: string;
+  vc_kode?: string;
+  vc_nama?: string;
+}
+
+export interface IDataSDMKaryawan {
+  vc_nik?: string;
+  vc_nama_kry?: string;
 }
 
 export interface ISkriningGizi {

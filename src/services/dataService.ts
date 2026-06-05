@@ -97,3 +97,19 @@ export const getDiagnosisGizi = async () => {
         throw error;
     }
 }
+
+export const getDataSDMKaryawan = async (vc_nik: string) => {
+    try {
+        const pool = await poolPromise;
+        const result = await pool.request()
+            .input("vc_nik", vc_nik)
+            .query(`
+                SELECT vc_nik, vc_nama_kry
+                FROM SDMKARYAWAN where vc_nik = @vc_nik
+            `);
+        return result.recordset;
+    } catch (error) {
+        logger.error("Error in getDataSDMKaryawan", error);
+        throw error;
+    }
+}

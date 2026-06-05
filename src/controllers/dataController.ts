@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { logger } from '../utils/logger';
-import { IApiResponse, IDataPddk, IDataPekerjaan, IDataJenisDiit, IDataSDMDokter, IDataRiwayatKunjung, IDataDiagnosisGizi } from '../@types';
-import { getDataPddk, getDataPekerjaan, getDataSDMDokter, getDataJenisDiit, getRiwayatKunjung, getDiagnosisGizi } from '../services/dataService';
+import { IApiResponse, IDataPddk, IDataPekerjaan, IDataJenisDiit, IDataSDMDokter, IDataRiwayatKunjung, IDataDiagnosisGizi, IDataSDMKaryawan } from '../@types';
+import { getDataPddk, getDataPekerjaan, getDataSDMDokter, getDataJenisDiit, getRiwayatKunjung, getDiagnosisGizi, getDataSDMKaryawan } from '../services/dataService';
 
 export const getPddkController = async (req: Request, res: Response) => {
     const response: IApiResponse = {
@@ -129,6 +129,36 @@ export const getDiagnosisGiziController = async (req: Request, res: Response) =>
     } catch (error: any) {
         logger.error(error, "Error getting Diagnosis Gizi");
         response.message = "Gagal mengambil data Diagnosis Gizi";
+        res.status(500).json(response);
+    }
+}
+
+export const getSDMKaryawanController = async (req: Request, res: Response) => {
+    const response: IApiResponse = {
+        success: false,
+        message: "",
+    };
+
+    try {
+        const { vc_nik } = req.params;
+        if (!vc_nik) {
+            res.status(400).json({ success: false, message: 'vc_nik tidak ditemukan' } as IApiResponse);
+            return;
+        }
+        const result = await getDataSDMKaryawan(vc_nik as string);
+
+        if (!result || result.length === 0) {
+            res.status(404).json({ success: false, message: 'Data SDM Karyawan tidak ditemukan' } as IApiResponse);
+            return;
+        }
+
+        response.success = true;
+        response.message = "Data berhasil diambil";
+        response.data = result as IDataSDMKaryawan[];
+        res.status(200).json(response);
+    } catch (error: any) {
+        logger.error(error, "Error getting SDM Karyawan");
+        response.message = "Gagal mengambil data SDM Karyawan";
         res.status(500).json(response);
     }
 }

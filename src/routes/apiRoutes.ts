@@ -14,6 +14,7 @@ import {
   getJenisDiitController,
   getRiwayatKunjungController,
   getDiagnosisGiziController,
+  getSDMKaryawanController,
 } from "../controllers/dataController";
 import { getSkriningGiziController } from "../controllers/getSkriningGiziController";
 import {
@@ -187,6 +188,25 @@ router.get("/riwayat-kunjung/:vc_norm", getRiwayatKunjungController);
  *         description: Sukses mendapatkan data
  */
 router.get("/diagnosis", getDiagnosisGiziController);
+
+/**
+ * @swagger
+ * /sdm-karyawan/{vc_nik}:
+ *   get:
+ *     summary: Mendapatkan data SDM Karyawan berdasarkan NIK
+ *     tags: [Referensi]
+ *     parameters:
+ *       - in: path
+ *         name: vc_nik
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Nomor Induk Karyawan
+ *     responses:
+ *       200:
+ *         description: Sukses mendapatkan data
+ */
+router.get("/sdm-karyawan/:vc_nik", getSDMKaryawanController);
 
 /**
  * @swagger
