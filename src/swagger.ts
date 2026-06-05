@@ -2,6 +2,8 @@ import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { Application } from "express";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const options: swaggerJSDoc.Options = {
   definition: {
     openapi: "3.0.0",
@@ -12,8 +14,8 @@ const options: swaggerJSDoc.Options = {
     },
     servers: [
       {
-        url: "/api",
-        description: "API Server",
+        url: isProduction ? "http://10.10.0.88/api-asuhangizi" : "/api",
+        description: isProduction ? "Production Server" : "Local Development",
       },
     ],
   },
